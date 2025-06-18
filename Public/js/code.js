@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // -----------------------------------------------------
 
     // Đảm bảo đường dẫn này đúng với nơi bạn đặt file PHP backend trên XAMPP
-    const API_BASE_URL = 'http://localhost/WEBXUDOAN/backend_railway/'; 
+    const API_BASE_URL = "https://websitetlu-backend-production.up.railway.app/"; 
 
     function updateLoginUI(isLoggedInStatus) {
         if (!loginLinkNavLi) return; // Thoát nếu không tìm thấy phần tử
