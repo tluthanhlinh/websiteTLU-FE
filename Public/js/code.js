@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // -----------------------------------------------------
 
     // Đảm bảo đường dẫn này đúng với nơi bạn đặt file PHP backend trên XAMPP
-    const API_BASE_URL = 'https://websitetlu-backend-.onrender.com/'; // <-- Dán URL backend Render vào đây
+    const API_BASE_URL = 'http://localhost/webxudoan/backend/api/'; // <-- Dán URL backend Render vào đây
     function updateLoginUI(isLoggedInStatus) {
         if (!loginLinkNavLi) return; // Thoát nếu không tìm thấy phần tử
 

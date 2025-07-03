@@ -1,156 +1,114 @@
-<!-- frontend_vercel/public/Detail.html -->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xứ Đoàn Thánh Linh - Chi Tiết Bài Viết</title>
-    <!-- Liên kết đến file CSS chính -->
-    <link rel="stylesheet" href="css/style.css"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Các style riêng cho trang chi tiết bài viết */
-        .article-detail-section {
-            background-color: var(--color-white);
-            padding: 2.5rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            margin-top: 2.5rem;
-            text-align: left; /* Đảm bảo căn lề trái */
+    <title>Chi tiết bài viết - Đoàn Thiếu Nhi Thánh Thể</title>
+    <link rel="stylesheet" href="../css/style.css"> <link rel="stylesheet" href="../css/post-detail.css"> <style>
+        /* CSS cơ bản để hiển thị nội dung cho đến khi bạn xây dựng giao diện chi tiết */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
         }
-        .article-detail-section h1 {
-            color: var(--color-primary);
-            margin-bottom: 1.5rem;
-            font-size: 2.5rem;
-            line-height: 1.2;
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        .article-detail-section .author-date {
-            font-size: 0.95rem;
-            color: #666;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid var(--color-gray-border);
-            padding-bottom: 1rem;
+        h1 {
+            color: #d9534f; /* Màu đỏ */
         }
-        .article-detail-section img {
+        .post-meta {
+            font-size: 0.9em;
+            color: #777;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .post-content img {
             max-width: 100%;
             height: auto;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            display: block; /* Đảm bảo ảnh chiếm đúng không gian */
-            margin-left: auto;
-            margin-right: auto;
+            display: block;
+            margin: 15px auto;
         }
-        .article-detail-section .full-content {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--color-text-dark);
-        }
-        .article-detail-section .full-content p {
-            margin-bottom: 1rem;
-        }
-        .article-detail-section .full-content ul,
-        .article-detail-section .full-content ol {
-            margin-left: 20px;
-            margin-bottom: 1rem;
-        }
-        .loading-message, .error-message {
-            text-align: center;
-            font-size: 1.2rem;
-            color: #555;
-            padding: 50px 0;
-        }
-        .back-link {
+        .back-button {
             display: inline-block;
-            margin-top: 2rem;
-            color: var(--color-secondary);
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
             text-decoration: none;
-            font-weight: bold;
-            padding: 0.6rem 1.2rem;
-            border: 1px solid var(--color-secondary);
             border-radius: 5px;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
-        .back-link:hover {
-            background-color: var(--color-secondary);
-            color: var(--color-white);
-            text-decoration: none;
-        }
-
-        /* Responsive cho trang chi tiết */
-        @media (max-width: 768px) {
-            .article-detail-section {
-                padding: 1.5rem;
-            }
-            .article-detail-section h1 {
-                font-size: 1.8rem;
-            }
-            .article-detail-section .full-content {
-                font-size: 1rem;
-            }
+        .back-button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <header class="main-header">
-        <!-- <div class="banner-content">
-            <img src="images/logoTL.jpg" alt="Logo Xứ Đoàn Thánh Linh" class="banner-logo">
-            <h1 class="banner-slogan">HY SINH - CẦU NGUYỆN</h1>
-            <p class="banner-subtitle">TÔN SÙNG THÁNH THỂ - LÀM VIỆC TÔNG ĐỒ</p> -->
-        </div>
-        <nav class="main-nav-links">
-            <div class="container">
-                <ul>
-                    <li><a href="Index.html">Trang Chủ</a></li>
-                    <li><a href="Introduce.html">Giới Thiệu</a></li>
-                    <li><a href="Events.html">Sự Kiện</a></li>
-                    <li><a href="News.html">Tin Tức</a></li>
-                    <li><a href="Login.html">Đăng Nhập</a></li>
-                    <li><a href="admin/AddPost.html" id="addArticleLink" style="display:none;">Đăng Bài</a></li>
-                    <li><button id="logoutButton" class="nav-link-button" style="display:none;">Đăng Xuất</button></li>
-                </ul>
-            </div>
-        </nav>
+    <header>
+        <nav>
+            </nav>
     </header>
 
-    <main class="main-content">
-        <div class="container">
-            <section class="article-detail-section" id="articleDetail">
-                <p class="loading-message">Đang tải bài viết...</p>
-                <!-- Nội dung bài viết chi tiết sẽ được tải bởi JavaScript -->
-            </section>
-            <a href="javascript:history.back()" class="back-link">Quay lại</a>
+    <div class="container">
+        <button class="back-button" onclick="history.back()">Quay lại</button>
+        <h1 id="post-title">Đang tải bài viết...</h1>
+        <div class="post-meta">
+            <span id="post-author"></span> - 
+            <span id="post-category"></span> - 
+            <span id="post-created-at"></span>
         </div>
-    </main>
+        <div class="post-content" id="post-content">
+            <p>Vui lòng chờ trong giây lát...</p>
+        </div>
+    </div>
 
     <footer>
-        <div class="container">
-            <div>
-                <h3>Liên Hệ</h3>
-                <p>Địa chỉ: [Địa chỉ Đoàn/Giáo xứ của bạn]</p>
-                <p>Email: [Email liên hệ]</p>
-                <p>Điện thoại: [Số điện thoại liên hệ]</p>
-            </div>
-            <div>
-                <h3>Thời Gian Hoạt Động</h3>
-                <p>Sáng Chủ Nhật: [Thời gian]</p>
-                <p>Chiều Thứ Bảy: [Thời gian]</p>
-            </div>
-            <div>
-                <h3>Sơ Đồ Ban Điều Hành</h3>
-                <p>Trưởng Đoàn: [Tên Trưởng Đoàn]</p>
-                <p>Phó Trưởng Đoàn: [Tên Phó Trưởng Đoàn]</p>
-            </div>
-        </div>
-        <div class="container copyright">
-            <p>&copy; 2025 Thiếu Nhi Thánh Thể. All rights reserved.</p>
-        </div>
-    </footer>
+        </footer>
 
-    <button id="backToTopBtn" title="Cuộn lên đầu trang">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
 
-    <!-- Liên kết đến file JavaScript chính -->
-    <script src="js/code.js"></script>
+            if (postId) {
+                // Đảm bảo URL này trỏ đến API GetSinglePost.php của bạn trên localhost
+                // CHÚ Ý: Bạn có thể cần điều chỉnh đường dẫn này tùy theo cấu hình của bạn
+                // Ví dụ: http://localhost/webxudoan/backend/api/post/GetSinglePost.php?id=...
+                const API_URL = `http://localhost/webxudoan/backend/api/post/GetPosts.php?id=${postId}`;
+
+                fetch(API_URL)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        document.getElementById('post-title').innerText = data.title;
+                        document.getElementById('post-content').innerHTML = data.content; // Dùng innerHTML vì content có thể có thẻ HTML
+                        document.getElementById('post-author').innerText = `Tác giả: ${data.author}`;
+                        document.getElementById('post-category').innerText = `Danh mục: ${data.category_name}`;
+                        document.getElementById('post-created-at').innerText = `Ngày đăng: ${new Date(data.created_at).toLocaleDateString('vi-VN')}`;
+                    })
+                    .catch(error => {
+                        console.error('Lỗi khi tải chi tiết bài viết:', error);
+                        document.getElementById('post-title').innerText = 'Không thể tải bài viết.';
+                        document.getElementById('post-content').innerHTML = '<p>Đã xảy ra lỗi khi tải nội dung bài viết. Vui lòng thử lại sau.</p>';
+                    });
+            } else {
+                document.getElementById('post-title').innerText = 'Không có ID bài viết.';
+                document.getElementById('post-content').innerHTML = '<p>Không tìm thấy ID bài viết để hiển thị.</p>';
+            }
+        });
+    </script>
+    <script src="./js/common.js"></script>
 </body>
 </html>

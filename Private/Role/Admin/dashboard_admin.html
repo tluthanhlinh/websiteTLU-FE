@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Xứ Đoàn Thánh Linh</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css"> <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style">
+    <link rel="preload" href="js/admin-common.js" as="script">
+    <link rel="preload" href="js/dashboard-stats.js" as="script"> 
+</head>
+<body>
+
+    <div class="d-flex" id="wrapper">
+        <div class="bg-dark-blue text-white" id="sidebar-wrapper">
+            <div class="sidebar-heading text-center py-4 fs-5 fw-bold text-white">
+                <img src="../../../Public/images/logoTL.jpg" alt="Logo Xứ Đoàn Thánh Linh" class="me-2" style="height: 45px;"> <span>Xứ Đoàn Thánh Linh</span>
+            </div>
+            <div class="list-group list-group-flush mt-3">
+                <a href="#" class="list-group-item list-group-item-action custom-bg-dark-blue text-white active" data-content="dashboard" aria-current="page">
+                    <i class="fas fa-home me-3"></i> <span>Trang chủ</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action custom-bg-dark-blue text-white" data-content="users">
+                    <i class="fas fa-user-friends me-3"></i> <span>Quản lý Thành Viên</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action custom-bg-dark-blue text-white" data-content="permissions">
+                    <i class="fas fa-user-lock me-3"></i>Phân quyền, chức năng
+                </a>
+                <a href="#" class="list-group-item list-group-item-action custom-bg-dark-blue text-white" data-content="activities">
+                    <i class="fas fa-calendar-alt me-3"></i> <span>Quản lý Hoạt động / Sự kiện</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action custom-bg-dark-blue text-white" data-content="posts">
+                    <i class="fas fa-bullhorn me-3"></i> <span>Quản lý Tin tức / Thông báo</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action custom-bg-dark-blue text-white" data-content="settings">
+                    <i class="fas fa-cog me-3"></i> <span>Cấu hình Hệ thống</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action custom-bg-dark-blue text-white" data-content="logout">
+                    <i class="fas fa-sign-out-alt me-3"></i> <span>Đăng xuất</span>
+                </a>
+            </div>
+        </div>
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom py-3">
+                <div class="container-fluid">
+                    <button class="btn btn-transparent" id="sidebarToggle" aria-label="Toggle sidebar">
+                        <i class="fas fa-bars fa-lg"></i>
+                    </button>
+                    <span class="navbar-text ms-md-4 fs-4 fw-bold" role="status" aria-live="polite">
+                        <span id="welcomeText">👋 Xin chào , <span class="fw-bold" id="pageTitle"></span></span>
+                    </span>
+                    <a href="#" class="btn btn-danger ms-auto" data-content="logout" aria-label="Đăng xuất">
+                        <i class="fas fa-sign-out-alt me-1"></i> Đăng xuất
+                    </a>
+                </div>
+            </nav>
+            <div class="container-fluid py-4" id="main-content-container">
+                <div id="dashboard-content" class="content-section">
+                    <h4 class="mb-4 text-muted">Tổng quan Quản trị Hệ thống Xứ Đoàn Thánh Linh</h4>
+
+                    <div class="row g-4 mb-5">
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <div class="card p-3 shadow-sm rounded-3 h-100 border-0" style="background-color: #e0f2f1;">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-circle bg-info-subtle text-info me-3">
+                                        <i class="fas fa-users-cog fs-3"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="text-muted mb-1">Tổng số Tài khoản</h6>
+                                        <h3 class="fw-bold" id="totalUsers">Đang tải...</h3> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6 d-none"> 
+                            <div class="card p-3 shadow-sm rounded-3 h-100 border-0" style="background-color: #fff3e0;">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-circle bg-warning-subtle text-warning me-3">
+                                        <i class="fas fa-child fs-3"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="text-muted mb-1">Tổng số Đoàn sinh</h6>
+                                        <h3 class="fw-bold" id="totalThieuNhisCount">Đang tải...</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6 d-none"> 
+                            <div class="card p-3 shadow-sm rounded-3 h-100 border-0" style="background-color: #e8f5e9;">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-circle bg-success-subtle text-success me-3">
+                                        <i class="fas fa-user-tie fs-3"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="text-muted mb-1">Tổng số Huynh trưởng</h6>
+                                        <h3 class="fw-bold" id="totalHuynhTruongsCount">Đang tải...</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <div class="card p-3 shadow-sm rounded-3 h-100 border-0" style="background-color: #fce4ec;">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-circle bg-danger-subtle text-danger me-3">
+                                        <i class="fas fa-calendar-check fs-3"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="text-muted mb-1">Hoạt động sắp tới</h6>
+                                        <h3 class="fw-bold" id="upcomingActivities">Đang tải...</h3> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <div class="card p-3 shadow-sm rounded-3 h-100 border-0" style="background-color: #f3e5f5;">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-circle bg-purple-subtle text-purple me-3">
+                                        <i class="fas fa-bullhorn fs-3"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="text-muted mb-1">Tin tức / Thông báo</h6>
+                                        <h3 class="fw-bold" id="totalPosts">Đang tải...</h3> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <div class="card p-3 shadow-sm rounded-3 h-100 border-0" style="background-color: #e3f2fd;">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-circle bg-primary-subtle text-primary me-3">
+                                        <i class="fas fa-file-alt fs-3"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="text-muted mb-1">Tổng số Hoạt động</h6> <h3 class="fw-bold" id="totalActivities">Đang tải...</h3> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <div class="card p-3 shadow-sm rounded-3 h-100 border-0" style="background-color: #fce4ec;">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-circle bg-pink-subtle text-pink me-3">
+                                        <i class="fas fa-shield-alt fs-3"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="text-muted mb-1">Số lượng Admin</h6>
+                                        <h3 class="fw-bold" id="totalAdmins">Đang tải...</h3> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <div class="card p-3 shadow-sm rounded-3 h-100 border-0" style="background-color: #f1f8e9;">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-circle bg-lime-subtle text-lime me-3">
+                                        <i class="fas fa-user-shield fs-3"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="text-muted mb-1">Số lượng Boss</h6>
+                                        <h3 class="fw-bold" id="totalBosses">Đang tải...</h3> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-lg-7">
+                            <div class="card p-4 shadow-sm rounded-3 border-0 h-100">
+                                <h5>Hoạt động gần đây của Hệ thống</h5>
+                                <p class="text-muted">Các hoạt động đăng nhập, cập nhật dữ liệu gần đây...</p>
+                                <div id="recent-activities-log" style="height: 250px; overflow-y: auto; border: 1px solid #eee; padding: 10px; border-radius: 5px;">
+                                    <p>Không có hoạt động gần đây để hiển thị.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="card p-4 shadow-sm rounded-3 border-0 h-100">
+                                <h5>Thao tác nhanh của Admin</h5>
+                                <div class="row g-3 mt-2">
+                                    <div class="col-md-6">
+                                        <button class="btn btn-primary w-100 py-3" data-content="add-user" aria-label="Thêm tài khoản mới">
+                                            <i class="fas fa-plus-circle me-2"></i> Thêm Tài khoản Mới
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="btn btn-dark-blue-btn w-100 py-3" data-content="users" aria-label="Quản lý tài khoản">
+                                            <i class="fas fa-users-cog me-2"></i> Quản lý Tài khoản
+                                        </button>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-warning w-100 py-3 mt-2" data-content="add-post" aria-label="Đăng tin tức mới">
+                                            <i class="fas fa-pen-nib me-2"></i> Đăng Tin tức (Admin)
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="dynamic-content">
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/dashboard-stats.js"></script> 
+    <script src="js/admin-common.js"></script> </body>
+</html>

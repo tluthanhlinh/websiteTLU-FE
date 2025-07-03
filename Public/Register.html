@@ -3,44 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng Ký - Xứ Đoàn Thánh Linh</title>
-    <!-- Liên kết đến file CSS chính -->
-    <link rel="stylesheet" href="css/style.css">
-    
-    <!-- Thêm Font Awesome để dùng icon (nếu cần) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Đăng Ký Tài Khoản</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/auth.css"> 
 </head>
 <body>
+    <!-- Div cho hình ảnh trang trí/background (nếu có) -->
+    <div class="decorative-image-container">
+        <!-- Bạn có thể đặt thẻ <img> ở đây hoặc sử dụng CSS background-image -->
+        <!-- Ví dụ: <img src="../images/your_decorative_image.jpg" alt="Decorative Image"> -->
+    </div>
 
-    <main class="main-content">
-        <div class="container">
-            <section class="page-section auth-form-container">
-                <h2>Đăng Ký Tài Khoản Mới</h2>
-                <form id="registerForm" class="auth-form">
-                    <div class="form-group">
-                        <label for="regUsername">Tên đăng nhập:</label>
-                        <input type="text" id="regUsername" name="username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="regPassword">Mật khẩu:</label>
-                        <input type="password" id="regPassword" name="password" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="regConfirmPassword">Xác nhận mật khẩu:</label>
-                        <input type="password" id="regConfirmPassword" name="confirm_password" required>
-                    </div>
-                    <button type="submit" class="btn-submit">Đăng Ký</button>
-                    <p class="form-link">Đã có tài khoản? <a href="Login.html">Đăng nhập ngay</a></p>
-                    <div id="registerMessage" class="message-box"></div>
-                </form>
-            </section>
+    <div class="auth-form-container"> 
+        <div class="auth-logo">
+            <!-- Đặt logo Thiếu Nhi Thánh Thể của bạn ở đây. Ví dụ: -->
+            <img src="./images/logoTL.jpg" alt="Logo Xứ Đoàn Thánh Linh">
         </div>
-    </main>
+        <h2>Đăng Ký Thành Viên Xứ Đoàn Thánh Linh</h2>
+        <p class="welcome-message">Chào mừng bạn đến với Xứ Đoàn Thánh Linh! Hãy đăng ký để tham gia và trải nghiệm các hoạt động phong phú của Thiếu Nhi Thánh Thể.</p>
 
+        <form id="registerForm" class="auth-form"> 
+            <div class="form-group">
+                <label for="fullName">Họ và Tên:</label>
+                <input type="text" id="fullName" name="full_name" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Tên đăng nhập:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mật khẩu:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Xác nhận mật khẩu:</label>
+                <input type="password" id="confirmPassword" name="confirm_password" required>
+            </div>
+            <button type="submit" class="btn-submit">Đăng Ký</button> 
+        </form>
+        <div id="message" class="message-box"></div> 
+        <p class="form-link">Đã có tài khoản? <a href="Login.html">Đăng nhập ngay</a></p> 
+        <p class="form-link">
+            <a href="Index.html">Quay lại trang chủ</a>
+        </p>
+    </div>
 
-    <button id="backToTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
-
-    <!-- Liên kết đến file JavaScript chính -->
-    <script src="js/code.js"></script>
+    <script src="./js/register.js"></script>
 </body>
 </html>

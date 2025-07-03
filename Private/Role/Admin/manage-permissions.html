@@ -1,0 +1,33 @@
+<div class="row my-4">
+    <h3 class="fs-4 mb-3">Phân quyền, phân chức năng</h3>
+    <div class="col">
+        <div class="input-group mb-3">
+            <input type="text" id="permissionSearchInput" class="form-control" placeholder="Tìm kiếm tài khoản theo tên, email...">
+            <button class="btn btn-outline-secondary" type="button" id="permissionSearchButton">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table bg-white rounded shadow-sm table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" width="50">ID</th>
+                        <th scope="col">Tên đăng nhập</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Vai trò hiện tại</th>
+                        <th scope="col">Cấp vai trò mới</th>
+                        <th scope="col">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="permissionTableBody">
+                    <tr>
+                        <td colspan="6" class="text-center">Đang tải dữ liệu tài khoản và quyền...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="../../../Public/js/permission-management.js"></script>

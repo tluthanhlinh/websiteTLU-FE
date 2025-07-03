@@ -1,0 +1,275 @@
+/* frontend/public/css/auth.css - Phiên bản nâng cấp với background hình ảnh và fix mobile */
+
+/* Styles cho Body và Pseudo-element để đặt hình nền mờ */
+html {
+    height: 100%; /* Đảm bảo HTML chiếm toàn bộ chiều cao */
+}
+
+body {
+    min-height: 100vh; /* Đảm bảo body luôn cao ít nhất bằng chiều cao viewport để flexbox hoạt động */
+    margin: 0; /* Loại bỏ margin mặc định */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font mặc định */
+    position: relative; /* Tạo ngữ cảnh cho pseudo-element */
+    z-index: 1; /* Đảm bảo body ở lớp dưới để pseudo-element có thể nằm dưới nó */
+    overflow-y: auto; /* Cho phép cuộn theo chiều dọc nếu nội dung vượt quá chiều cao màn hình */
+    display: flex; /* Bật flexbox để căn giữa form con bên trong */
+    justify-content: center; /* Căn giữa form theo chiều ngang */
+    align-items: center; /* Căn giữa form theo chiều dọc. Nếu nội dung dài hơn màn hình, nó sẽ trượt lên. */
+    padding: 20px 0; /* Thêm padding dọc cho body để tránh form dính sát mép trên/dưới khi cuộn */
+}
+
+/* Pseudo-element để đặt hình ảnh nền và làm mờ nó */
+body::before {
+    content: ''; /* Bắt buộc phải có content cho pseudo-element */
+    position: fixed; /* Cố định với viewport để nó luôn ở phía sau */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/Damas1.jpg'); /* <-- ĐẶT ĐƯỜNG DẪN HÌNH ẢNH CỦA BẠN TẠI ĐÂY */
+    background-size: cover; /* Đảm bảo hình ảnh che phủ toàn bộ viewport */
+    background-position: center center; /* Căn giữa hình ảnh */
+    background-repeat: no-repeat; /* Không lặp lại hình ảnh */
+    background-attachment: fixed; /* Giữ hình ảnh cố định khi cuộn */
+    filter: blur(2px); /* Áp dụng hiệu ứng làm mờ 2px */
+    -webkit-filter: blur(2px); /* Hỗ trợ trình duyệt Webkit */
+    z-index: -1; /* Đặt lớp này dưới tất cả các nội dung khác trong body */
+    transition: filter 0.5s ease-out; /* Hiệu ứng chuyển đổi (nếu có thay đổi dynamic) */
+}
+
+
+/* --- Styles cho Form Đăng nhập/Đăng ký --- */
+/* Form này sẽ hiển thị rõ nét vì nó không bị filter blur và có thể cuộn */
+.auth-form-container {
+    max-width: 400px; /* Chiều rộng tối đa vẫn là 400px */
+    margin: auto; /* Sử dụng auto margin để form tự căn giữa trong flex container (body) */
+    padding: 2rem; /* Giữ padding này hoặc điều chỉnh thêm nếu cần */
+    background-color: rgba(255, 255, 255, 0.9); /* Nền trắng hơi trong suốt */
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    backdrop-filter: blur(5px); /* Hiệu ứng làm mờ nền (nếu nền trong suốt), tùy chọn */
+    border: 1px solid rgba(var(--color-gray-border-rgb), 0.3);
+    animation: fadeInScale 0.8s ease-out forwards;
+    position: relative; /* Đảm bảo form ở trên lớp hình nền bị mờ */
+    z-index: 2; /* Đặt z-index cao hơn để form nằm trên hình nền */
+    box-sizing: border-box; /* Đảm bảo padding không làm tăng tổng chiều rộng */
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.auth-logo {
+    margin-bottom: 2rem;
+}
+
+.auth-logo img {
+    max-width: 150px;
+    height: auto;
+}
+
+.auth-form-container h2 {
+    color: var(--color-secondary);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+    font-weight: 700;
+}
+
+.welcome-message {
+    color: var(--color-text-light);
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    text-align: left;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    font-size: 1rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"] {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    border: 1px solid var(--color-gray-border);
+    border-radius: 8px;
+    font-size: 1.05rem;
+    color: var(--color-text-dark);
+    background-color: var(--color-white);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus,
+.form-group input[type="email"]:focus {
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 3px rgba(var(--color-secondary-rgb), 0.2);
+    outline: none;
+    background-color: var(--color-white-focus);
+}
+
+.password-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.password-group .forgot-password {
+    align-self: flex-end;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.password-group .forgot-password:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+
+.btn-submit {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 1.2rem 3rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+    margin: 2rem 0 1.5rem 0;
+    box-shadow: 0 4px 15px rgba(var(--color-primary-rgb), 0.3);
+}
+
+.btn-submit:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(var(--color-primary-rgb), 0.4);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(var(--color-primary-rgb), 0.2);
+}
+
+/* Loading state for button */
+.btn-submit.loading {
+    background-color: #ccc;
+    cursor: not-allowed;
+    color: #666;
+    box-shadow: none;
+    transform: none;
+}
+
+.form-link {
+    font-size: 1rem;
+    color: var(--color-text-dark);
+    margin-top: 0.8rem;
+}
+
+.form-link a {
+    color: var(--color-primary);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.form-link a:hover {
+    color: var(--color-secondary);
+    text-decoration: underline; 
+}
+
+/* --- Message Box Styles (cho thông báo lỗi/thành công) --- */
+.message-box {
+    padding: 1rem 1.5rem;
+    margin-top: 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    opacity: 0; 
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateY(15px); 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); 
+}
+.message-box.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+.message-box.success {
+    background-color: rgba(var(--color-success-rgb), 0.1); 
+    color: rgb(var(--color-success-rgb)); 
+    border: 1px solid rgb(var(--color-success-rgb));
+}
+.message-box.error {
+    background-color: rgba(var(--color-error-rgb), 0.1); 
+    color: rgb(var(--color-error-rgb)); 
+    border: 1px solid rgb(var(--color-error-rgb));
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .auth-form-container {
+        padding: 1.5rem; /* Điều chỉnh padding cho responsive */
+        /* Bỏ margin: auto; ở đây vì body đã là flex container và xử lý căn giữa */
+        width: 90%; /* Chiếm phần lớn chiều rộng màn hình */
+        max-width: 350px; /* Nhưng không quá lớn trên tablet */
+        border-radius: 12px;
+    }
+    .auth-logo img {
+        max-width: 100px;
+    }
+    .auth-form-container h2 {
+        font-size: 2rem;
+        margin-bottom: 0.4rem;
+    }
+    .welcome-message {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    .form-group label {
+        font-size: 0.95rem;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="password"],
+    .form-group input[type="email"] {
+        padding: 0.8rem 1rem;
+        font-size: 0.95rem;
+        border-radius: 6px;
+    }
+    .btn-submit {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        border-radius: 6px;
+        margin-top: 1.5rem;
+    }
+    .message-box {
+        font-size: 0.9rem;
+        padding: 0.7rem 1rem;
+    }
+    .form-link {
+        font-size: 0.9rem;
+    }
+}
